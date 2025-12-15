@@ -3,8 +3,10 @@ services:
     name: email-scraper-backend
     env: node
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm run start:prod
+    # FIXED: Only install production deps, add memory limit
+    buildCommand: npm ci --only=production --max-old-space-size=512 && NODE_OPTIONS=--max-old-space-size=512 npm run build
+    # FIXED: Add memory limit to start command
+    startCommand: node --max-old-space-size=512 dist/main
     envVars:
       - key: NODE_ENV
         value: production
@@ -14,3 +16,6 @@ services:
         fromDatabase:
           name: email-scraper-db
           property: connectionString
+      # ADD THIS: Memory limit environment variable
+      - key: NODE_OPTIONS
+        value: --max-old-space-size=512
