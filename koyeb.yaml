@@ -1,0 +1,31 @@
+name: emailscraper-backend
+type: web
+framework: node
+envs:
+  - name: NODE_ENV
+    value: production
+  - name: PORT
+    value: 3000
+  - name: FRONTEND_URL
+    value: https://emailscrapper2025.netlify.app/
+  - name: MONGODB_URI
+    value: mongodb+srv://scrapper_email_data:yCqMALINHw4YyZrw@cluster0.zgrmr6k.mongodb.net/
+  - name: JWT_SECRET
+    generate: true
+  # Add your API keys in Koyeb dashboard
+  - name: SCRAPINGBEE_API_KEY
+    secret: true
+  - name: SCRAPINGDOG_API_KEY
+    secret: true
+routes:
+  - path: /
+    port: 3000
+build:
+  command: npm run build
+run:
+  command: npm run start:prod
+  args: []
+instance:
+  type: free
+regions:
+  - fra
