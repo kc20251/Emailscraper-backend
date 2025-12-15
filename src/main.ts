@@ -15,6 +15,12 @@ async function bootstrap() {
     credentials: true,
   });
 
+  // Health check endpoint using the underlying HTTP adapter
+    const httpAdapter = app.getHttpAdapter();
+    httpAdapter.get('/health', (req: any, res: any) => {
+      res.json({ status: 'OK', timestamp: new Date() });
+    });
+
   // Global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
