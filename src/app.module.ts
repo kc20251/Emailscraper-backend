@@ -19,7 +19,7 @@ import { SubscriptionModule } from './subscription/subscription.module';
   imports: [
      ConfigModule.forRoot({
       isGlobal: true,
-      load: [configuration], // Add this line to load your configuration
+      load: [configuration], 
     }),
   MongooseModule.forRootAsync({
       imports: [ConfigModule],
